@@ -1,0 +1,246 @@
+package gui;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+
+public class Kalkulator extends JFrame implements ActionListener {
+	
+	public String[] tablicaKalkulator = new String[20];
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private JButton bLiczba0, bLiczba1, bLiczba2, bLiczba3, bLiczba4, bLiczba5, bLiczba6, bLiczba7, bLiczba8, bLiczba9;
+	private JButton bPlus, bMinus, bMnozenie, bDzielenie, bPierwiastek;
+	private JButton bNawiasOtwarty, bNawiasZamkniety, bModulo, bSilnia, bPotega;
+	private JButton bCzysc, bRownaSie;
+	private JTextField tWynik;
+	
+	private String wyrazenie = new String();
+	
+	public Kalkulator(){
+		
+		setSize(420,300);
+		setTitle("Kalkulator");
+		getContentPane().setLayout(null);
+		
+		bLiczba0 = new JButton("0");
+		bLiczba0.setBounds(20, 200, 120, 30);
+		getContentPane().add(bLiczba0);
+		bLiczba0.addActionListener(this);
+		
+		bLiczba1 = new JButton("1");
+		bLiczba1.setBounds(20, 170, 60, 30);
+		getContentPane().add(bLiczba1);
+		bLiczba1.addActionListener(this);
+		
+		bLiczba2 = new JButton("2");
+		bLiczba2.setBounds(80, 170, 60, 30);
+		getContentPane().add(bLiczba2);
+		bLiczba2.addActionListener(this);
+		
+		bLiczba3 = new JButton("3");
+		bLiczba3.setBounds(140, 170, 60, 30);
+		getContentPane().add(bLiczba3);
+		bLiczba3.addActionListener(this);
+		
+		bLiczba4 = new JButton("4");
+		bLiczba4.setBounds(20, 140, 60, 30);
+		getContentPane().add(bLiczba4);
+		bLiczba4.addActionListener(this);
+		
+		bLiczba5 = new JButton("5");
+		bLiczba5.setBounds(80, 140, 60, 30);
+		getContentPane().add(bLiczba5);
+		bLiczba5.addActionListener(this);
+		
+		bLiczba6 = new JButton("6");
+		bLiczba6.setBounds(140, 140, 60, 30);
+		getContentPane().add(bLiczba6);
+		bLiczba6.addActionListener(this);
+		
+		bLiczba7 = new JButton("7");
+		bLiczba7.setBounds(20, 110, 60, 30);
+		getContentPane().add(bLiczba7);
+		bLiczba7.addActionListener(this);
+		
+		bLiczba8 = new JButton("8");
+		bLiczba8.setBounds(80, 110, 60, 30);
+		getContentPane().add(bLiczba8);
+		bLiczba8.addActionListener(this);
+		
+		bLiczba9 = new JButton("9");
+		bLiczba9.setBounds(140, 110, 60, 30);
+		getContentPane().add(bLiczba9);
+		bLiczba9.addActionListener(this);
+		
+		bPlus = new JButton("+");
+		bPlus.setBounds(140, 200, 60, 30);
+		getContentPane().add(bPlus);
+		bPlus.addActionListener(this);
+		
+		bMinus = new JButton("-");
+		bMinus.setBounds(200, 200, 60, 30);
+		getContentPane().add(bMinus);
+		bMinus.addActionListener(this);
+		
+		bMnozenie = new JButton("*");
+		bMnozenie.setBounds(200, 170, 60, 30);
+		getContentPane().add(bMnozenie);
+		bMnozenie.addActionListener(this);
+		
+		bDzielenie = new JButton("/");
+		bDzielenie.setBounds(200, 140, 60, 30);
+		getContentPane().add(bDzielenie);
+		bDzielenie.addActionListener(this);
+		
+		bPierwiastek = new JButton("sqrt");
+		bPierwiastek.setBounds(200, 110, 60, 30);
+		getContentPane().add(bPierwiastek);
+		bPierwiastek.addActionListener(this);
+		
+		bRownaSie = new JButton("=");
+		bRownaSie.setBounds(320, 110, 60, 30);
+		getContentPane().add(bRownaSie);
+		bRownaSie.addActionListener(this);
+		
+		bCzysc = new JButton("C");
+		bCzysc.setBounds(320, 140, 60, 60);
+		getContentPane().add(bCzysc);
+		bCzysc.addActionListener(this);
+		
+		bSilnia = new JButton("!");
+		bSilnia.setBounds(260, 110, 60, 30);
+		getContentPane().add(bSilnia);
+		bSilnia.addActionListener(this);
+		
+		bPotega = new JButton("^");
+		bPotega.setBounds(260, 140, 60, 30);
+		getContentPane().add(bPotega);
+		bPotega.addActionListener(this);
+		
+		bModulo = new JButton("%");
+		bModulo.setBounds(320, 200, 60, 30);
+		getContentPane().add(bModulo);
+		bModulo.addActionListener(this);
+		
+		bNawiasOtwarty = new JButton("(");
+		bNawiasOtwarty.setBounds(260, 170, 60, 30);
+		getContentPane().add(bNawiasOtwarty);
+		bNawiasOtwarty.addActionListener(this);
+		
+		bNawiasZamkniety = new JButton(")");
+		bNawiasZamkniety.setBounds(260, 200, 60, 30);
+		getContentPane().add(bNawiasZamkniety);
+		bNawiasZamkniety.addActionListener(this);
+		
+		
+		tWynik = new JTextField("");
+		tWynik.setHorizontalAlignment(SwingConstants.RIGHT);
+		tWynik.setBounds(20, 50, 360, 60);
+		tWynik.setEditable(false);
+		getContentPane().add(tWynik);
+		
+		
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+	
+		Object zrodlo = e.getSource();
+		
+		if(zrodlo == bLiczba0){
+			wyrazenie = wyrazenie + "0";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bLiczba1){
+			wyrazenie = wyrazenie + "1";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bLiczba2){
+			wyrazenie = wyrazenie + "2";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bLiczba3){
+			wyrazenie = wyrazenie + "3";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bLiczba4){
+			wyrazenie = wyrazenie + "4";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bLiczba5){
+			wyrazenie = wyrazenie + "5";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bLiczba6){
+			wyrazenie = wyrazenie + "6";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bLiczba7){
+			wyrazenie = wyrazenie + "7";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bLiczba8){
+			wyrazenie = wyrazenie + "8";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bLiczba9){
+			wyrazenie = wyrazenie + "9";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bPlus){
+			wyrazenie = wyrazenie + "+";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bMinus){
+			wyrazenie = wyrazenie + "-";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bMnozenie){
+			wyrazenie = wyrazenie + "*";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bDzielenie){
+			wyrazenie = wyrazenie + "/";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bPierwiastek){
+			wyrazenie = wyrazenie + "sqrt";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bNawiasOtwarty){
+			wyrazenie = wyrazenie + "(";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bNawiasZamkniety){
+			wyrazenie = wyrazenie + ")";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bPotega){
+			wyrazenie = wyrazenie + "^";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bModulo){
+			wyrazenie = wyrazenie + "%";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bSilnia){
+			wyrazenie = wyrazenie + "!";
+			tWynik.setText(wyrazenie);
+		} else if(zrodlo == bRownaSie){
+			wyrazenie = wyrazenie + "=";
+			NaOnp na = new NaOnp();
+
+			tablicaKalkulator[0] = wyrazenie;
+			
+			//System.out.println(tablicaKalkulator[0]);
+
+			wyrazenie = na.funkcjaOnp(tablicaKalkulator);
+
+			tWynik.setText(wyrazenie);
+		}  else if(zrodlo == bCzysc){
+			wyrazenie = "";
+			tWynik.setText(wyrazenie);
+		}
+		
+	}
+
+	public static void main(String[] args) {
+		Kalkulator aplikacja = new Kalkulator();
+		aplikacja.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		aplikacja.setVisible(true);
+	}
+
+}
